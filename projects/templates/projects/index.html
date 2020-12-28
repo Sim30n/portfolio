@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+{% block content %}
+
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Petteri Särkkä</h1>
+        <p class="lead text-muted">Here is my collection of projects. The collection consists of data-analysis projects, web pages, mobile apps, command-line applications, etc.</p>
+        <p>
+          <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for instance in object_list %}
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="{{ instance.image.url }}" alt="" class="bd-placeholder-img card-img-top" width="100%" height="225">
+              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+              <div class="card-body">
+                <h5 class="card-title">{{ instance.title }}</h5>
+                <p class="card-text">{{ instance.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    {% if instance.link%}
+                    <a href="{{ instance.link }}"><button type="button" class="btn btn-sm btn-outline-secondary">Link</button></a>
+                    {% endif %}
+                    {% if instance.code %}
+                    <a href="{{ instance.code }}"><button type="button" class="btn btn-sm btn-outline-secondary">Code</button></a>
+                    {% endif %}
+                  </div>
+                  <small class="text-muted">{{ instance.date }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% endfor %}
+
+
+      </div>
+    </div>
+  </div>
+
+</main>
+{% endblock %}
